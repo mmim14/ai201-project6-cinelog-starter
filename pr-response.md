@@ -29,9 +29,9 @@ Also, I had to add watchlist_entries = db.relationship("WatchlistEntry", backref
 **Tradeoff acknowledged:** Some users may have issues with having their watch list being made public, especially if they didn't pay attention that it's public by default. To counter that we can, show on the UI the list is public.
 
 ## Comment 5 — Sort order
-**My position:**
-**Reasoning:**
-**Engagement with reviewer's point:**
+**My position:** I think we should sort watch list alphabetically. 
+**Reasoning:** People may want to see what movies to watch not by how recently they added it. Sorting by name makes it easier to navigate the list to pick a movie. From my experience, I don't care about when I added a movie, but I care about what movie I want to watch the most depending on the mood. 
+**Engagement with reviewer's point:** Although sorting by recency doesn't require reorganizing by sorting the list (you can a just add it at the end of the list) and return it starting from the back of the array, sorting alphabetically help browsing the list better. 
 
 ## Comment 6 — Rebase
 **What conflicted:**
