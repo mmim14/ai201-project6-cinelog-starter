@@ -5,7 +5,7 @@
 
 I used Claude AI to summarize files like models.py, walk me through particular functions like add_to_collection(), and ask specific questions that I didn't understand. 
 
-I used AI to create test cases. 
+I used AI to create test cases, and review my commit messages and to rewrite it to better explain what my code does. 
 
 ## Comment 1 — Rename
 **What I did:** I renamed save_to_watchlist() to add_to_watchlist() in services/watchlist_service.py and updated 2 instances in routes/watchlist/watchlist.py
@@ -47,4 +47,4 @@ I am going to add back the WatchlistEntry() functions to models.py.
 <!-- Written at the end — feature overview, design decisions, manual testing steps -->
 
 ## git log
-![alt text](image-1.png)
+![git log](image-1.png)
