@@ -34,8 +34,13 @@ Also, I had to add watchlist_entries = db.relationship("WatchlistEntry", backref
 **Engagement with reviewer's point:** Although sorting by recency doesn't require reorganizing by sorting the list (you can a just add it at the end of the list) and return it starting from the back of the array, sorting alphabetically help browsing the list better. 
 
 ## Comment 6 — Rebase
-**What conflicted:**
-**How I resolved it:**
+**What conflicted:** Conflict 1: main did have .pytest_cache/ in .gitignore.
+
+Another issue I ran into is rebasing just dropped WatchlistEntry() from models.py and I didn't actually run into a conflict. The main branch didn't have WatchlistEntry(), but feature/watchlist branch did. According to rebase hisotry, it got dropped because main and feature/watch branch conlicted over how id in Film is generated and it was resolved by dropping feature/watch branch and taking everything from main only, but main doesn't have  WatchlistEntry(). The rebase went wrong. 
+
+**How I resolved it:** Resolution 1: I decided to keep .pytest_cache/ and resolved the conlfict and continued the rebase. 
+
+I am going to add back the WatchlistEntry() functions to models.py. 
 **How I verified no conflict remains:**
 
 ## PR Description
