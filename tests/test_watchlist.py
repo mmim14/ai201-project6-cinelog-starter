@@ -89,3 +89,38 @@ def test_add_to_watchlist_duplicate_raises(app, sample_user, sample_film):
             user_id=sample_user, film_id=sample_film
         ).count()
         assert count == 1
+
+# ── Nonexistent film ─────────────────────────────────────────────────────────
+
+def test_add_to_watchlist_nonexistent_film_raises(app, sample_user):
+    """
+    Adding a film_id that doesn't exist in the database should raise
+    FilmNotFoundError, not a database integrity error.
+    """
+    with app.app_context():
+        with pytest.raises(FilmNotFoundError):
+            add_to_watchlist(user_id=sample_user, film_id=999999)
+
+# ── get_watchlist sorted by title ─────────────────────────────────────────────────
+
+def test_get_watchlist_returns_films_sorted_by_title(app, sample_user):
+    """
+    get_watchlist() should return films sorted by title ascending,
+    with watchlist metadata (date_added, public) attached.
+    """
+    with app.app_context():
+        film_a = Film(title="Blade Runner", year=1982, genre="Sci-Fi")
+        film_b = Film(title="Alien", year=1979, genre="Horror")
+        db.session.add_all([film_a, film_b])
+        db.session.commit()
+
+        add_to_watchlist(user_id=sample_user, film_id=film_a.id)
+        add_to_watchlist(user_id=sample_user, film_id=film_b.id)
+
+        watchlist = get_watchlist(sample_user)
+        titles = [f["title"] for f in watchlist]
+
+        # Sorted by title ascending: Alien before Blade Runner
+        assert titles == ["Alien", "Blade Runner"]
+        assert "date_added" in watchlist[0]
+        assert "public" in watchlist[0]
